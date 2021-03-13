@@ -26,6 +26,8 @@
                 android:layout_height="match_parent"
                 android:layout_span="4"
                 android:gravity="center_vertical|end"
+                android:singleLine="true"
+                android:ellipsize="start"
                 android:text="@string/result"
                 android:textColor="@color/pink"
                 android:textSize="50sp"

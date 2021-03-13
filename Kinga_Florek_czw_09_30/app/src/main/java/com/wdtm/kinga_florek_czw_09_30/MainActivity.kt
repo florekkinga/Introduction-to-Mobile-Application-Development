@@ -4,10 +4,13 @@ package com.wdtm.kinga_florek_czw_09_30
 // Zrealizowane podpunkty:
 // - całość podpuktu 1
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,15 +19,21 @@ class MainActivity : AppCompatActivity() {
     private lateinit var equalsButton: Button
     private lateinit var dotButton: Button
     private lateinit var clearButton: Button
-    private lateinit var resultLabel: TextView
+    private lateinit var displayLabel: TextView
 
     private val calculatorEngine: CalculatorItf = Calculator()
+    private var decimal: Boolean = false
+    private var display: String = "0"
+        set(value){
+            displayLabel.text = value
+            field = value
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        resultLabel = findViewById(R.id.result)
+        displayLabel = findViewById(R.id.result)
         equalsButton = findViewById(R.id.equals)
         dotButton = findViewById(R.id.dot)
         clearButton = findViewById(R.id.clear)
@@ -49,22 +58,53 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun operationPressed(button: Button) {
-        TODO("Not yet implemented")
+        decimal = false
+        var operation = ""
+        when(button.id){
+            R.id.addition -> operation = getString(R.string.addition)
+            R.id.subtraction -> operation = getString(R.string.subtraction)
+            R.id.multiplication -> operation = getString(R.string.multiplication)
+            R.id.division -> operation = getString(R.string.division)
+            R.id.percent -> operation = getString(R.string.percent)
+            R.id.square_root -> operation = getString(R.string.square_root)
+        }
+        display += operation
+        calculatorEngine.addOperation(operation)
     }
 
     private fun digitPressed(button: Button) {
-        TODO("Not yet implemented")
+        val digit = digits.indexOf(button)
+        if(display == getString(R.string._0)){
+            display = digit.toString()
+        }
+        else {
+            display += digit.toString()
+        }
+        calculatorEngine.addNumber(digit)
     }
 
     private fun dotButtonPressed() {
-        TODO("Not yet implemented")
+        if(!decimal) {
+            calculatorEngine.setDecimal(true)
+            decimal = true
+            display += getString(R.string.dot)
+        }
     }
 
     private fun clear() {
-        TODO("Not yet implemented")
+        calculatorEngine.clear()
+        display = getString(R.string._0)
+        decimal = false
     }
 
     private fun evaluateFormula() {
-        TODO("Not yet implemented")
+        try{
+            calculatorEngine.evaluateFormula()
+        }
+        catch (e: Exception){
+            val message = getString(R.string.message)
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            display = getString(R.string._0)
+        }
     }
 }
