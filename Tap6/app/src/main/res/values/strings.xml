@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Tap6</string>
+    <string name="buttonLabelText">Start!</string>
+    <string name="buttonLabelTextGameStarted">Tap Me!</string>
+    <string name="scoreLabelText">Score: %1$d!</string>
+    <string name="timeLabelText">Time left: %1$d!</string>
+    <string name="message">Gave is over! Your score: %1$d</string>
+</resources>
