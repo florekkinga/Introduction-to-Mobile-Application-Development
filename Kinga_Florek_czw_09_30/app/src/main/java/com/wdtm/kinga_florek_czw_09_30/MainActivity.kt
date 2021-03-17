@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
             display += digit.toString()
         }
         calculatorEngine.addNumber(digit)
-        if((isPrevOperation || display == "0")&& digit == 0){
+        if ((isPrevOperation || display == "0") && digit == 0) {
             dotButtonPressed()
         }
         isPrevOperation = false
@@ -138,7 +138,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun evaluateFormula() {
         display = try {
-              calculatorEngine.evaluateFormula().toString()
+            calculatorEngine.evaluateFormula().toString()
 //            String.format("%.3f", calculatorEngine.evaluateFormula())
         } catch (e: Exception) {
             val message = getString(R.string.message)
