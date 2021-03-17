@@ -18,19 +18,19 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3" >
+            android:layout_weight="3">
 
             <TextView
                 android:id="@+id/result"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_span="4"
+                android:ellipsize="start"
                 android:gravity="center_vertical|end"
                 android:singleLine="true"
-                android:ellipsize="start"
-                android:text="@string/result"
+                android:text=""
                 android:textColor="@color/pink"
-                android:textSize="50sp"
+                android:textSize="40sp"
                 android:textStyle="bold" />
         </TableRow>
 
@@ -75,7 +75,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <Button
                 android:id="@+id/_7"
@@ -113,7 +113,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <Button
                 android:id="@+id/_4"
@@ -151,7 +151,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <Button
                 android:id="@+id/_1"
@@ -189,7 +189,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <Button
                 android:id="@+id/dot"
