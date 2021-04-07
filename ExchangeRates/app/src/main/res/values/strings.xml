@@ -3,4 +3,6 @@
     <string name="currency_converter">Przelicznik Walut</string>
     <string name="exchange_rates">Kursy Walut</string>
     <string name="gold">Złoto</string>
+    <string name="gold_main">Aktualny kurs złota wynosi:</string>
+    <string name="gold_rate">6692.62 PLN/uncję</string>
 </resources>

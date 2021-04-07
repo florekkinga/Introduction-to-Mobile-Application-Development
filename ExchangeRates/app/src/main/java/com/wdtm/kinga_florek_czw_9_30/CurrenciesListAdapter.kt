@@ -1,5 +1,7 @@
 package com.wdtm.kinga_florek_czw_9_30
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CurrenciesListAdapter(var dataSet: Array<CurrencyDetails>) : RecyclerView.Adapter<CurrenciesListAdapter.ViewHolder>() {
+class CurrenciesListAdapter(var dataSet: Array<CurrencyDetails>, val context: Context) : RecyclerView.Adapter<CurrenciesListAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val currencyCodeTextView: TextView
         val currentRateTextView: TextView
@@ -36,7 +38,10 @@ class CurrenciesListAdapter(var dataSet: Array<CurrencyDetails>) : RecyclerView.
     }
 
     private fun goToDetails(position: Int) {
-
+        val intent = Intent(context, CurrencyDetailsActivity::class.java).apply {
+            putExtra("positionInArray", position)
+        }
+        context.startActivity(intent)
     }
 
     override fun getItemCount() = dataSet.size

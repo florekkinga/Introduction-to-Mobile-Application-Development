@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kinga_Florek_czw_9_30">
-        <activity android:name=".CurrencyConverterActivity"></activity>
+        <activity android:name=".CurrencyDetailsActivity"></activity>
+        <activity android:name=".CurrencyConverterActivity" />
         <activity android:name=".GoldActivity" />
         <activity android:name=".ExchangeRatesActivity" />
         <activity android:name=".MainActivity">

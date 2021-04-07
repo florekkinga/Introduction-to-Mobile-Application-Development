@@ -21,7 +21,7 @@ class ExchangeRatesActivity : AppCompatActivity() {
         currenciesListRecyclerView = findViewById(R.id.currenciesListRecyclerView)
         currenciesListRecyclerView.layoutManager = LinearLayoutManager(this)
         val tmpData = arrayOf(CurrencyDetails("EUR", 4.56), CurrencyDetails("CHF", 4.55))
-        adapter = CurrenciesListAdapter(tmpData)
+        adapter = CurrenciesListAdapter(tmpData, this)
         currenciesListRecyclerView.adapter = adapter
         DataHolder.prepare(applicationContext)
         makeRequest()
