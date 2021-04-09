@@ -6,4 +6,11 @@
     <string name="gold_main">Aktualny kurs złota wynosi:</string>
     <string name="gold_rate">6692.62 PLN/uncję</string>
     <string name="details">Szczegóły</string>
+    <string name="todayRateText">Dzisiejszy kurs: %1$f</string>
+    <string name="previousRateText">Wczorajszy kurs: %1$f</string>
+    <string name="change">CHANGE</string>
+    <string name="edit_to_pln_text">1.0</string>
+    <string name="edit_from_pln_text">1.0</string>
+    <string name="convert_to_pln">Convert to PLN</string>
+    <string name="convert_from_pln">Convert from pln</string>
 </resources>

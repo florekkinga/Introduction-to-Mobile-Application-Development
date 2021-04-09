@@ -23,22 +23,21 @@ class ExchangeRatesActivity : AppCompatActivity() {
         val tmpData = arrayOf(CurrencyDetails("EUR", 4.56), CurrencyDetails("CHF", 4.55))
         adapter = CurrenciesListAdapter(tmpData, this)
         currenciesListRecyclerView.adapter = adapter
-        DataHolder.prepare(applicationContext)
         makeRequest()
     }
 
     fun makeRequest() {
-        val queue = newRequestQueue(applicationContext)
-        val url = "http://api.nbp.pl/api/exchangerates/tables/A?format=json"
+        val queue = DataHolder.queue
+        val url = "http://api.nbp.pl/api/exchangerates/tables/A/last/2?format=json"
 
         val currenciesListRequest = JsonArrayRequest(Request.Method.GET, url, null,
-            Response.Listener { response ->
+            { response ->
                 println("SUCCESS!")
                 loadData(response)
                 adapter.dataSet = dataSet
                 adapter.notifyDataSetChanged()
             },
-            Response.ErrorListener {
+            {
                 println("ERROR!!!!")
             })
 
@@ -46,15 +45,19 @@ class ExchangeRatesActivity : AppCompatActivity() {
     }
 
     private fun loadData(response: JSONArray?) {
-        response?.let{
-            val rates = response.getJSONObject(0).getJSONArray("rates")
+        response?.let {
+            val rates = response.getJSONObject(1).getJSONArray("rates")
+            val previousRates = response.getJSONObject(0).getJSONArray("rates")
             val ratesCount = rates.length()
             val tmpData = arrayOfNulls<CurrencyDetails>(ratesCount)
 
-            for (i in 0 until ratesCount){
+            for (i in 0 until ratesCount) {
                 val currencyCode = rates.getJSONObject(i).getString("code")
                 val currentRate = rates.getJSONObject(i).getDouble("mid")
-                val currencyObject = CurrencyDetails(currencyCode, currentRate)
+                val previousRate = previousRates.getJSONObject(i).getDouble("mid")
+                val flag = DataHolder.getFlagForCurrency(currencyCode)
+                val isGrowing = DataHolder.getArrowForGrowing(previousRate < currentRate)
+                val currencyObject = CurrencyDetails(currencyCode, currentRate, flag, isGrowing)
 
                 tmpData[i] = currencyObject
             }

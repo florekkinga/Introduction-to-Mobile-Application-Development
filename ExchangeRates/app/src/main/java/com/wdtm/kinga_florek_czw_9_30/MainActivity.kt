@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         exchangeRatesButton = findViewById(R.id.exchange_rates)
         goldButton = findViewById(R.id.gold)
         currencyConverterButton = findViewById(R.id.currency_converter)
+        DataHolder.prepare(applicationContext)
 
         exchangeRatesButton.setOnClickListener { openExchangeRatesActivity() }
         goldButton.setOnClickListener { openGoldActivity() }
@@ -29,7 +30,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openGoldActivity() {
-        val intent = Intent(this, GoldActivity::class.java).apply {}
+        val intent = Intent(this, CurrencyDetailsActivity::class.java).apply {
+            putExtra("currencyCode", "GOLD")
+        }
         startActivity(intent)
     }
 

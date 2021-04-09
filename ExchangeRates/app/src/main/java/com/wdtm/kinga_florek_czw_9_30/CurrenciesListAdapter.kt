@@ -9,37 +9,41 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CurrenciesListAdapter(var dataSet: Array<CurrencyDetails>, val context: Context) : RecyclerView.Adapter<CurrenciesListAdapter.ViewHolder>() {
+class CurrenciesListAdapter(var dataSet: Array<CurrencyDetails>, private val context: Context) :
+    RecyclerView.Adapter<CurrenciesListAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val currencyCodeTextView: TextView
         val currentRateTextView: TextView
         val flagView: ImageView
+        val isGrowingView: ImageView
 
-        init{
+        init {
             currencyCodeTextView = view.findViewById(R.id.currencyCodeTextView)
             currentRateTextView = view.findViewById(R.id.rateTextView)
             flagView = view.findViewById(R.id.flagView)
+            isGrowingView = view.findViewById(R.id.isGrowingView)
         }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-                .inflate(R.layout.currency_rate, viewGroup, false)
+            .inflate(R.layout.currency_rate, viewGroup, false)
 
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int){
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val currency = dataSet[position]
         viewHolder.currencyCodeTextView.text = currency.currencyCode
         viewHolder.currentRateTextView.text = currency.rate.toString()
         viewHolder.flagView.setImageResource(currency.flag)
-        viewHolder.itemView.setOnClickListener { goToDetails(position) }
+        viewHolder.isGrowingView.setImageResource(currency.isGrowing)
+        viewHolder.itemView.setOnClickListener { goToDetails(currency.currencyCode) }
     }
 
-    private fun goToDetails(position: Int) {
+    private fun goToDetails(currencyCode: String) {
         val intent = Intent(context, CurrencyDetailsActivity::class.java).apply {
-            putExtra("positionInArray", position)
+            putExtra("currencyCode", currencyCode)
         }
         context.startActivity(intent)
     }
