@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openCurrencyConverterActivity() {
-        val intent = Intent(this, CurrencyConverterActivity::class.java).apply {}
+        val intent = Intent(this, ConverterActivity::class.java).apply {}
         startActivity(intent)
     }
 

@@ -13,4 +13,11 @@
     <string name="edit_from_pln_text">1.0</string>
     <string name="convert_to_pln">Convert to PLN</string>
     <string name="convert_from_pln">Convert from pln</string>
+    <string name="resultTextString">%1$.2f %2$s = %3$.2f %4$s</string>
+    <string name="togglebutton">ToggleButton</string>
+    <string name="pln">PLN</string>
+    <string name="arrow_down">↓</string>
+    <string name="arrow_up">↑</string>
+    <string name="konwertuj">konwertuj</string>
+    <string name="converter">Konwerter</string>
 </resources>

@@ -11,9 +11,9 @@ import com.android.volley.toolbox.Volley.newRequestQueue
 import org.json.JSONArray
 
 class ExchangeRatesActivity : AppCompatActivity() {
-    internal lateinit var currenciesListRecyclerView: RecyclerView
-    internal lateinit var adapter: CurrenciesListAdapter
-    internal lateinit var dataSet: Array<CurrencyDetails>
+    private lateinit var currenciesListRecyclerView: RecyclerView
+    private lateinit var adapter: CurrenciesListAdapter
+    private var dataSet: Array<CurrencyDetails> = arrayOf<CurrencyDetails>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ class ExchangeRatesActivity : AppCompatActivity() {
         makeRequest()
     }
 
-    fun makeRequest() {
+    private fun makeRequest() {
         val queue = DataHolder.queue
         val url = "http://api.nbp.pl/api/exchangerates/tables/A/last/2?format=json"
 
@@ -34,17 +34,26 @@ class ExchangeRatesActivity : AppCompatActivity() {
             { response ->
                 println("SUCCESS!")
                 loadData(response)
+            },
+            {
+                println("ERROR!!!!")
+            })
+        val urlB = "http://api.nbp.pl/api/exchangerates/tables/B/last/2?format=json"
+        val currenciesListRequestB = JsonArrayRequest(Request.Method.GET, urlB, null,
+            { response ->
+                println("SUCCESS!")
+                loadData(response, false)
                 adapter.dataSet = dataSet
                 adapter.notifyDataSetChanged()
             },
             {
                 println("ERROR!!!!")
             })
-
         queue.add(currenciesListRequest)
+        queue.add(currenciesListRequestB)
     }
 
-    private fun loadData(response: JSONArray?) {
+    private fun loadData(response: JSONArray?, a: Boolean = true) {
         response?.let {
             val rates = response.getJSONObject(1).getJSONArray("rates")
             val previousRates = response.getJSONObject(0).getJSONArray("rates")
@@ -57,12 +66,13 @@ class ExchangeRatesActivity : AppCompatActivity() {
                 val previousRate = previousRates.getJSONObject(i).getDouble("mid")
                 val flag = DataHolder.getFlagForCurrency(currencyCode)
                 val isGrowing = DataHolder.getArrowForGrowing(previousRate < currentRate)
-                val currencyObject = CurrencyDetails(currencyCode, currentRate, flag, isGrowing)
+                val currencyObject = CurrencyDetails(currencyCode, currentRate, flag, isGrowing, a)
 
                 tmpData[i] = currencyObject
             }
 
-            this.dataSet = tmpData as Array<CurrencyDetails>
+            this.dataSet += tmpData as Array<CurrencyDetails>
+            this.dataSet.distinctBy { it.currencyCode }
         }
     }
 

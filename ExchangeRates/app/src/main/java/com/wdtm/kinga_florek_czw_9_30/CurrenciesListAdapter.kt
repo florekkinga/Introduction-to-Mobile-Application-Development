@@ -38,12 +38,13 @@ class CurrenciesListAdapter(var dataSet: Array<CurrencyDetails>, private val con
         viewHolder.currentRateTextView.text = currency.rate.toString()
         viewHolder.flagView.setImageResource(currency.flag)
         viewHolder.isGrowingView.setImageResource(currency.isGrowing)
-        viewHolder.itemView.setOnClickListener { goToDetails(currency.currencyCode) }
+        viewHolder.itemView.setOnClickListener { goToDetails(currency.currencyCode, currency.a) }
     }
 
-    private fun goToDetails(currencyCode: String) {
+    private fun goToDetails(currencyCode: String, a: Boolean) {
         val intent = Intent(context, CurrencyDetailsActivity::class.java).apply {
             putExtra("currencyCode", currencyCode)
+            putExtra("table", a)
         }
         context.startActivity(intent)
     }

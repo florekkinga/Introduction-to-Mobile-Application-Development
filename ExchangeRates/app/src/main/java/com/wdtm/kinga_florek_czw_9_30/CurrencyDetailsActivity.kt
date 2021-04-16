@@ -29,6 +29,7 @@ class CurrencyDetailsActivity : AppCompatActivity() {
     internal lateinit var currencyCode: String
     internal lateinit var historicRates: Array<Pair<String, Double>>
     internal var isGold: Boolean = false
+    internal lateinit var table: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +40,13 @@ class CurrencyDetailsActivity : AppCompatActivity() {
         yesterdayRate = findViewById(R.id.previousRateText)
         lineChartMonth = findViewById(R.id.lineChart)
         lineChartWeek = findViewById(R.id.lineChartWeek)
+        table = if (intent.getBooleanExtra("table", true)) {
+            "A"
+        } else {
+            "B"
+        }
         currencyCode = intent.getStringExtra("currencyCode") ?: "USD"
-        if(currencyCode == "GOLD"){
+        if (currencyCode == "GOLD") {
             isGold = true
             title = "Złoto"
         }
@@ -61,23 +67,22 @@ class CurrencyDetailsActivity : AppCompatActivity() {
 
     private fun getHistoricRates() {
         val queue = DataHolder.queue
-        // jak dwie tabele to w intencie przekazać ktora to tabela
-        val url = if(isGold){
+        val url = if (isGold) {
             "http://api.nbp.pl/api/cenyzlota/last/30?format=json"
         } else {
-            "http://api.nbp.pl/api/exchangerates/rates/A/%s/last/30?format=json".format(
+            "http://api.nbp.pl/api/exchangerates/rates/%s/%s/last/30?format=json".format(
+                table,
                 currencyCode
             )
         }
-        val historicRatesRequest = if(isGold){
+        val historicRatesRequest = if (isGold) {
             JsonArrayRequest(Request.Method.GET, url, null, { response ->
                 println("Success!")
                 loadGoldData(response)
                 showData()
             },
                 { println("ERROR!!!") })
-        }
-        else {
+        } else {
             JsonObjectRequest(Request.Method.GET, url, null,
                 { response ->
                     println("Success!")

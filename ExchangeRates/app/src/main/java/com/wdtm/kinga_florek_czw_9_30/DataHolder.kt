@@ -18,11 +18,7 @@ object DataHolder {
     }
 
     fun getFlagForCurrency(currencyCode: String): Int {
-        return if (currencyCode == "XDR") {
-            R.drawable.xdrflag
-        } else {
-            currencies.find { it.code == currencyCode }?.flag ?: 0
-        }
+        return currencies.find { it.code == currencyCode }?.flag ?: R.drawable.world_flag
     }
 
     fun getArrowForGrowing(isGrowing: Boolean): Int {
