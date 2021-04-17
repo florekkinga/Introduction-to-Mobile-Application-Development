@@ -2,22 +2,22 @@ package com.wdtm.kinga_florek_czw_9_30
 
 /* Kinga Florek, czwartek godzina 9:30
 * Zrealizowane podpunkty:
-*   1. Layout - tak, obsługa sytuacji awaryjny - nie?
-*   2. Ekran startowy posiada 3 przyciski - Kursy walut/Złoto/Przelicznik
-*   3. Obsługa tabeli A
+*   1. Layout - tak, obsługa sytuacji awaryjnych - tak (gdy nie ma internetu wyświetlam komunikat i progress bar)
+*   2. tak
+*   3. tak
 *   4. Kursy walut:
 *       4a. tak
 *       4b. tak
-*       4c. skorzystałam z innej biblioteki niż była na zajęciach, więc nie było problemu z flagami
+*       4c. skorzystałam z innej biblioteki niż była na zajęciach, więc nie było problemu z flagami,
+*       natomiast w sytuacji gdy biblioteka nie posiada flagi dla danej waluty wyświetlam ikonę świata
 *       4d. tak
 *       4e. tak
 *   5. Złoto:
 *       5a. tak
 *       5b. tak
 *   6. Przelicznik walut:
-*       Stworzyłam layout
-*       6a.
-*       6b.
+*       6a. tak
+*       6b. tak
 **/
 
 import android.content.Intent

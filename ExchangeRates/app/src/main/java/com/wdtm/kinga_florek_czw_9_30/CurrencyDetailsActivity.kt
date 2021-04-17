@@ -2,7 +2,10 @@ package com.wdtm.kinga_florek_czw_9_30
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NavUtils
 import com.android.volley.Request
@@ -81,7 +84,9 @@ class CurrencyDetailsActivity : AppCompatActivity() {
                 loadGoldData(response)
                 showData()
             },
-                { println("ERROR!!!") })
+                {
+                    Toast.makeText(this, "Brak internetu. Proszę włącz internet i zrestartuj aplikację", Toast.LENGTH_LONG).show();
+                    println("ERROR!!!!")})
         } else {
             JsonObjectRequest(Request.Method.GET, url, null,
                 { response ->
@@ -89,7 +94,10 @@ class CurrencyDetailsActivity : AppCompatActivity() {
                     loadData(response)
                     showData()
                 },
-                { println("ERROR!!!") })
+                {
+                    Toast.makeText(this, "Brak internetu. Proszę włącz internet i zrestartuj aplikację", Toast.LENGTH_LONG).show();
+                    println("ERROR!!!!")
+                    println("ERROR!!!") })
         }
         queue.add(historicRatesRequest)
     }
