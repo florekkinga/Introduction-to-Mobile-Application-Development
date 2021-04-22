@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kinga_Florek_czw_09_30</string>
+    <string name="app_name">Calculator</string>
     <string name="dot">.</string>
     <string name="clear">C</string>
     <string name="square_root">√</string>

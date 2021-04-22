@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kinga_Florek_czw_9_30</string>
+    <string name="app_name">Exchange Rates App</string>
     <string name="currency_converter">Przelicznik Walut</string>
     <string name="exchange_rates">Kursy Walut</string>
     <string name="gold">Złoto</string>
